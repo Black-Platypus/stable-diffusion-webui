@@ -2,6 +2,7 @@ from __future__ import annotations
 import os
 from collections import namedtuple
 import enum
+import logging
 
 import torch.nn as nn
 import torch.nn.functional as F
@@ -47,6 +48,9 @@ class NetworkOnDisk:
             self.metadata = m
 
         self.alias = self.metadata.get('ss_output_name', self.name)
+        if ":" in self.alias:
+            logging.warning("Alias contains colon; replacing it with dash: " + self.alias)
+            self.alias = self.alias.replace(":", "-")
 
         self.hash = None
         self.shorthash = None
