@@ -332,7 +332,7 @@ def load_networks(names, te_multipliers=None, unet_multipliers=None, dyn_dims=No
 
         if net is None:
             failed_to_load_networks.append(name)
-            logging.info(f"Couldn't find network with name {name}")
+            logging.warning(f"Couldn't find network with name {name}")
             continue
 
         net.te_multiplier = te_multipliers[i] if te_multipliers else 1.0
